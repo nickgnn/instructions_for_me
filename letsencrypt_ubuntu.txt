@@ -1,0 +1,36 @@
+sudo apt install snapd
+
+sudo snap install --classic certbot
+
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+
+sudo certbot certonly --standalone
+
+sudo certbot renew --dry-run
+
+Successfully received certificate.
+Certificate is saved at: /etc/letsencrypt/live/gnn.work.gd/fullchain.pem
+Key is saved at:         /etc/letsencrypt/live/gnn.work.gd/privkey.pem
+This certificate expires on 2024-12-06.
+
+
+или
+
+apt-get install certbot -y
+
+certbot certonly --standalone --agree-tos --email test@test.com -d gnn.work.gd
+
+sudo certbot renew --dry-run
+
+Successfully received certificate.
+Certificate is saved at: /etc/letsencrypt/live/gnn.work.gd/fullchain.pem
+Key is saved at:         /etc/letsencrypt/live/gnn.work.gd/privkey.pem
+This certificate expires on 2024-12-06.
+
+
+crontab -l
+crontab -e
+
+55 2 * * * certbot renew --quiet
+
+

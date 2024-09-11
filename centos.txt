@@ -1,0 +1,46 @@
+PBb0Rm4X2Hy4
+
+D2WZG9qSNDkb
+
+service sshd status
+service sshd restart
+
+yum update && yum upgrade -y
+yum install epel-release -y
+yum install sudo vim htop tree mc tmux policycoreutils iperf3 net-tools vnstat bwm-ng iftop nload wget -y
+
+useradd -d /home/gnn -m -s /bin/bash gnn
+ls -l /home
+
+passwd gnn
+9Z72Zj88
+
+usermod -G wheel -a gnn
+exit
+
+ssh-keygen
+
+chmod -R go= ~/.ssh
+
+cat ~/.ssh/id_rsa.pub | ssh gnn@185.189.12.153 "mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys && chmod -R go= ~/.ssh && cat >> ~/.ssh/authorized_keys"
+
+sudo vi /etc/ssh/sshd_config
+
+PermitRootLogin = no
+PasswordAuthentication = no
+PubkeyAuthentication = yes 
+KerberosAuthentication = no
+ChallengeResponseAuthentication = no
+UsePAM = no
+
+sudo systemctl restart sshd.service
+
+systemctl status firewalld
+systemctl stop firewalld
+systemctl disable firewalld
+
+iptables -L
+
+vi /etc/selinux/config = enforcing -> disabled
+
+yum install java-11-openjdk

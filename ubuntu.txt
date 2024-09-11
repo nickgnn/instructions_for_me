@@ -1,0 +1,291 @@
+ssh gnn@185.195.26.116
+
+ssh gnn@192.168.1.101
+ssh jenkins@192.168.1.111
+ssh jenkins@192.168.1.112
+ssh jenkins@192.168.1.113
+ssh jenkins@192.168.1.114
+ssh gnn@192.168.1.120
+
+service sshd status
+sudo service sshd restart
+
+sudo systemctl status ufw
+sudo systemctl stop ufw
+sudo systemctl disable ufw
+
+iptables -L
+
+sudo apt update
+sudo apt upgrade
+sudo apt update -y && apt upgrade -y
+sudo apt-get update && apt dist-upgrade -y
+
+sestatus
+
+sudo apt install vim htop tree mc tmux policycoreutils iperf3 net-tools vnstat bwm-ng iftop nload wget cron -y
+
+
+java -version
+
+sudo poweroff
+
+sudo apt install openjdk-11-jre -y
+sudo apt install openjdk-8-jre
+sudo apt-cache madison jenkins - find the possible jenkins versions available
+sudo apt-get install jenkins=2.401.3 -y
+
+reboot
+
+grep "invalid user root" /var/log/auth.log* |more
+sudo tcpdump -i enp0s3 icmp and icmp[icmptype]=icmp-echo
+sudo tcpdump -i ens3 icmp and icmp[icmptype]=icmp-echo
+iperf3 -s
+iperf3 -c <ip-server> -t 10000
+scp /home/sergiy/file root@losst.pro:/root/ - файл на удалённый
+
+scp D:/bdbot.jar gnn@45.9.75.98:/home/gnn/ - файл на удалённый
+scp D:/308464656.json gnn@45.9.75.98:/home/gnn/ - файл на удалённый
+
+scp dmdev-12_Bash.zip gnn@192.168.1.100:/home/gnn/
+scp bdbot.jar gnn@185.195.26.116:/home/gnn/
+scp -r /home/sergiy/photos root@losst.pro:/root/ - каталог на удалённый
+scp root@losst.pro:/root/file /home/sergiy/ - файл себе с удалённого
+scp ssh gnn@45.95.203.214:/home/gnn/asus_msk.ovpn D:/ - файл себе с удалённого
+scp ssh gnn@185.104.251.212:/home/gnn/msk.ovpn D:/ - файл себе с удалённого
+scp ssh gnn@gnn.work.gd:/home/gnn/ocserv_1.3.0-1_amd64.deb D:/ - файл себе с удалённого
+scp -r root@losst.pro:/root/photos /home/sergiy/ - каталог себе с удалённого
+
+===========================
+
+useradd -d /home/gnn -m -s /bin/bash gnn
+ls -l /home
+
+passwd gnn
+9Z72Zj88
+
+usermod -G sudo -a gnn
+exit
+
+ssh gnn@<ip>
+pwd
+sudo -s
+
+
+ssh-keygen
+ssh-copy-id -i id_rsa.pub <ip>
+
+
+/etc/ssh/sshd_config
+PermitRootLogin = no
+PasswordAuthentication = no
+PubkeyAuthentication = yes 
+KerberosAuthentication = no
+ChallengeResponseAuthentication = no
+UsePAM = no
+AuthorizedKeysFile - optional
+PubkeyAcceptedAlgorithms +ssh-rsa
+
+sudo ufw allow 22/tcp
+sudo ufw allow 1194/udp
+sudo ufw allow 51830/udp
+sudo ufw enable
+sudo ufw status
+
+===========================
+
+wget https://git.io/vpn -O openvpn-install.sh
+
+
+sudo bash ./openvpn-install.sh
+
+UDP
+1194
+Current System resolvers
+<username>
+
+sudo mv /root/asus_msk.ovpn . 
+sudo chown gnn asus_msk.ovpn
+
+===========================
+tmux new-session -s session1
+Ctrl+B Up
+Ctrl+B Down
+Ctrl+B "
+Ctrl+B %
+Ctrl+B d
+tmux attach -t session1
+tmux - set -g mouse on
+
+tmux attach -t session1
+
+https://losst.pro/monitoring-seti-linux
+===========================
+OpenVPN
+
+apt update
+apt upgrade
+
+===========================
+apt update && apt upgrade -y
+apt install -y wireguard
+
+cd /etc/wireguard/
+wg genkey | tee /etc/wireguard/privatekey | wg pubkey | tee /etc/wireguard/publickey
+chmod 600 privatekey
+
+vi wg0.conf
+
+ip a
+
+[Interface]
+PrivateKey = <privatekey>
+Address = 10.0.0.1/24
+ListenPort = 51830
+PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o <eth0> -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o <eth0> -j MASQUERADE
+
+
+echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+sysctl -p
+
+
+systemctl enable wg-quick@wg0.service
+systemctl start wg-quick@wg0.service
+systemctl status wg-quick@wg0.service
+
+
+wg genkey | tee /etc/wireguard/gnn_privatekey | wg pubkey | tee /etc/wireguard/gnn_publickey
+
+
+vi wg0.conf
+
+[Peer]
+PublicKey = gnn_privatekey
+AllowedIPs = 10.0.0.2/32
+
+
+
+systemctl restart wg-quick@wg0
+systemctl status wg-quick@wg0
+
+
+на локальном
+wg.conf
+
+[Interface]
+PrivateKey = KAXqVr24HVW6k8Uh3HE/vVnRwhSlAlE2KKFZQREE53c= (gnn_private)
+Address = 10.0.0.2/32
+DNS = 8.8.8.8
+
+[Peer]
+PublicKey = N7xHI7ISvcl7QEG5yxo+r+MFX65cVZ8dwHw211xsjCU= (<SERVER-PUBKEY>)
+Endpoint = 185.195.24.206:51830
+AllowedIPs = 0.0.0.0/0
+PersistentKeepalive = 20
+
+
+
+[Interface]
+PrivateKey = <CLIENT-PRIVATE-KEY>
+Address = 10.0.0.2/32
+DNS = 8.8.8.8
+
+[Peer]
+PublicKey = <SERVER-PUBKEY>
+Endpoint = <SERVER-IP>:51830
+AllowedIPs = 0.0.0.0/0
+PersistentKeepalive = 20
+===========================
+добавление второго пира wg
+
+wg genkey | tee /etc/wireguard/friend_privatekey | wg pubkey | tee /etc/wireguard/friend_publickey
+
+cat friend_publickey
+vi wg0.conf
+
+[Peer]
+PublicKey = friend_publickey
+AllowedIPs = 10.0.0.*++/32
+
+systemctl restart wg-quick@wg0.service
+systemctl status wg-quick@wg0.service
+
+на локальном
+friend_wg.conf
+
+[Interface]
+PrivateKey = KAXqVr24HVW6k8Uh3HE/vVnRwhSlAlE2KKFZQREE53c= (friend_privatekey)
+Address = 10.0.0.*++/32
+DNS = 8.8.8.8
+
+[Peer]
+PublicKey = N7xHI7ISvcl7QEG5yxo+r+MFX65cVZ8dwHw211xsjCU= (<SERVER-PUBKEY>)
+Endpoint = 185.195.24.206:51830
+AllowedIPs = 0.0.0.0/0
+PersistentKeepalive = 20
+===========================
+
+gnn@ubuntu-nginx:~$ cat /etc/nginx/nginx.conf
+
+
+events {
+}
+
+http {
+
+  server {
+    listen        80;
+    server_name   217.25.230.80;
+    root          /var/www/data/html;
+
+    location / {
+        root /var/www/data/html;
+    }
+
+    location /files/ {
+        root /var/www/data;
+
+        add_header Content-Disposition "attachment";
+        add_header Content-Type application/octet-stream;
+    }
+  }
+}
+
+===========================
+
+https://habr.com/ru/post/579924/
+
+/etc/netplan
+
+network:
+    ethernets:
+        enp0s3:
+            dhcp4: no
+            dhcp6: no
+            addresses: [192.168.1.200/24, ]
+            gateway4: 192.168.1.1
+            nameservers:
+                addresses: [192.168.1.1, ]
+    version: 2
+
+
+sudo tcpdump -i enp0s3 icmp and icmp[icmptype]=icmp-echo
+
+sudo hostnamectl set-hostname новое_имя
+
+
+==========================================================
+
+ocserv:
+
+sudo apt install -y python3-certbot ocserv openconnect nmap gnutls-bin dnsutils tcpdump curl gnupg2 apt-transport-https ca-certificates wireguard-tools perl libwww-perl
+
+
+iptables -nvL
+
+
+sudo apt-get -y install ocserv
+
+dns = 77.88.8.7
+dns = 77.88.8.3
