@@ -1,3 +1,22 @@
+=======================================================
+настройка статического ip
+vi /etc/sysconfig/network-scripts/ifcfg-enp0s3
+
+добавляем
+
+DEVICE="enp0s3"
+ONBOOT="yes"
+IPADDR=192.168.1.250
+NETMASK=255.255.255.0
+GATEWAY=192.168.1.1
+
+рестарт сетевого интерфейса
+ifdown enp0s3
+ifup enp0s3
+
+или сразу
+reboot
+
 С 1 июля 2024 года в CentOS 7 перейдите на архивные репозитории Vault:
 
 vi /etc/yum.repos.d/CentOS-Base.repo
@@ -60,7 +79,7 @@ vi /etc/ssh/sshd_config
 
 PermitRootLogin = no
 PasswordAuthentication = no
-PubkeyAuthentication = yes 
+PubkeyAuthentication = yes
 KerberosAuthentication = no
 ChallengeResponseAuthentication = no
 UsePAM = no
@@ -80,22 +99,3 @@ iptables -L
 vi /etc/selinux/config = enforcing -> disabled
 
 yum install java-11-openjdk
-
-=======================================================
-настройка статического ip
-vi /etc/sysconfig/network-scripts/ifcfg-enp0s3
-
-добавляем
-
-DEVICE="enp0s3"
-ONBOOT="yes"
-IPADDR=192.168.1.250
-NETMASK=255.255.255.0
-GATEWAY=192.168.1.1
-
-рестарт сетевого интерфейса
-ifdown enp0s3
-ifup enp0s3
-
-или сразу
-reboot
