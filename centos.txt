@@ -34,11 +34,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 yum clean all
 
 
-
-service sshd status
-service sshd restart
-
-yum update && yum upgrade -y
+yum update -y && yum upgrade -y
 yum install epel-release -y
 yum install vim htop tree mc tmux policycoreutils iperf3 net-tools vnstat bwm-ng iftop nload wget cron -y
 
@@ -57,7 +53,7 @@ chmod -R go= ~/.ssh
 
 cat ~/.ssh/id_rsa.pub | ssh gnn@185.189.12.153 "mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys && chmod -R go= ~/.ssh && cat >> ~/.ssh/authorized_keys"
 
-sudo vi /etc/ssh/sshd_config
+vi /etc/ssh/sshd_config
 
 PermitRootLogin = no
 PasswordAuthentication = no
@@ -66,7 +62,8 @@ KerberosAuthentication = no
 ChallengeResponseAuthentication = no
 UsePAM = no
 
-sudo systemctl restart sshd.service
+systemctl status sshd.service
+systemctl restart sshd.service
 
 systemctl status firewalld
 systemctl stop firewalld
