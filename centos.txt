@@ -38,7 +38,7 @@ service sshd restart
 
 yum update && yum upgrade -y
 yum install epel-release -y
-yum install sudo vim htop tree mc tmux policycoreutils iperf3 net-tools vnstat bwm-ng iftop nload wget -y
+yum install vim htop tree mc tmux policycoreutils iperf3 net-tools vnstat bwm-ng iftop nload wget cron -y
 
 useradd -d /home/gnn -m -s /bin/bash gnn
 ls -l /home
