@@ -27,6 +27,8 @@ baseurl=http://vault.centos.org/7.9.2009/centosplus/$basearch/
 gpgcheck=1
 enabled=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+
 При необходимости выполните следующие действия:
 
 yum clean all
@@ -75,3 +77,22 @@ iptables -L
 vi /etc/selinux/config = enforcing -> disabled
 
 yum install java-11-openjdk
+
+=======================================================
+настройка статического ip
+vi /etc/sysconfig/network-scripts/ifcfg-enp0s3
+
+добавляем
+
+DEVICE="enp0s3"
+ONBOOT="yes"
+IPADDR=192.168.1.250
+NETMASK=255.255.255.0
+GATEWAY=192.168.1.1
+
+рестарт сетевого интерфейса
+ifdown enp0s3
+ifup enp0s3
+
+или сразу
+reboot
