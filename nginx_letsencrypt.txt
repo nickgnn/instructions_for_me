@@ -1,0 +1,15 @@
+apt update -y && apt upgrade -y && apt dist-upgrade -y
+
+apt install nginx vim htop tree mc tmux policycoreutils iperf3 net-tools vnstat bwm-ng iftop nload wget cron -y
+
+hostnamectl set-hostname jenkins-master
+
+apt install snapd -y
+
+snap install --classic certbot
+
+ln -s /snap/bin/certbot /usr/bin/certbot
+
+certbot --nginx
+
+certbot renew --dry-run
