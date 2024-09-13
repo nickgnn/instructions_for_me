@@ -1,0 +1,29 @@
+1. Ставим все необходимые пакеты для OpenConnect v1.2.4
+
+# Basic build tools
+yum install -y install make automake gcc pkgconf-pkg-config git
+
+# Required
+yum install -y gnutls-devel libev-devel
+
+# Optional functionality and testing
+yum install -y pam-devel lz4-devel libseccomp-devel readline-devel libnl3-devel krb5-devel radcli-devel libcurl-devel cjose-devel jansson-devel liboath-devel protobuf-c-devel libtalloc-devel llhttp-devel protobuf-c gperf iperf3 lcov uid_wrapper pam_wrapper nss_wrapper socket_wrapper gssntlmssp haproxy iputils freeradius gawk gnutls-utils iproute yajl tcpdump
+
+# For manpages
+yum install -y rubygem-ronn-ng
+
+
+2. Клонируем репо последней версии https://gitlab.com/openconnect/ocserv
+(можно перейти и посмотреть в браузере по тегу какая последняя версия, сейчас 1.2.4)
+
+cd ~ && git clone -b 1.2.4 https://gitlab.com/openconnect/ocserv
+
+cd ~ && git clone -b 1.3.0 https://gitlab.com/openconnect/ocserv.git
+
+
+3. Собираем
+
+cd ocserv
+autoreconf -fvi
+./configure && make
+sudo make install
