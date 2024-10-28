@@ -48,7 +48,7 @@ scp D:/bdbot.jar gnn@45.9.75.98:/home/gnn/ - файл на удалённый
 scp D:/308464656.json gnn@45.9.75.98:/home/gnn/ - файл на удалённый
 
 scp dmdev-12_Bash.zip gnn@192.168.1.100:/home/gnn/
-scp bdbot.jar gnn@185.195.26.116:/home/gnn/
+scp openvpn-install.sh gnn@185.189.12.42:/home/gnn/ - файл на удалённый
 scp -r /home/sergiy/photos root@losst.pro:/root/ - каталог на удалённый
 scp root@losst.pro:/root/file /home/sergiy/ - файл себе с удалённого
 scp ssh gnn@45.95.203.214:/home/gnn/asus_msk.ovpn D:/ - файл себе с удалённого
