@@ -1,0 +1,26 @@
+Создать файл сервиса
+vi /etc/systemd/system/birthday-bot.service
+
+
+
+Заполнить вот так
+[Unit]
+Description=my bot
+
+[Service]
+Type=simple
+WorkingDirectory=/home/gnn
+ExecStart=java -Dfile.encoding=UTF-8 -jar bdbot.jar
+ExecStop=sudo lsof -i :9081 | sed -En 's/[^0-9]*([0-9]+)[^0-9]*/\1 /gp' | sed 's/\s/./g' | sed -n '/./s/\..*//p' | xargs sudo kill -15
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+В конце выполнить
+sudo systemctl daemon-reload
+sudo systemctl enable birthday-bot.service
+sudo systemctl start birthday-bot.service
+sudo systemctl status birthday-bot.service
