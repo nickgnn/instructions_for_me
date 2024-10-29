@@ -289,3 +289,40 @@ sudo apt-get -y install ocserv
 
 dns = 77.88.8.7
 dns = 77.88.8.3
+
+=========================
+
+Как настроить iptables для openvpn
+Если вы установили сервер openvpn и iptable блокирует службу по умолчанию,
+то используйте эти конфигурации для правильной работы openvpn.
+Сначала давайте разрешим соединение tcp на порту openvpn.
+Если вы используете udp или другой номер порта, то измените эту строку соответствующим образом.
+
+iptables -A INPUT -i ens3 -m state --state NEW -p udp --dport 1194 -j ACCEPT
+
+
+Разрешить подключения интерфейса TUN к серверу OpenVPN
+
+iptables -A INPUT -i tun+ -j ACCEPT
+
+
+Разрешить пересылку соединений интерфейса TUN через другие интерфейсы
+
+iptables -A FORWARD -i tun+ -j ACCEPT
+iptables -A FORWARD -i tun+ -o ens3 -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i ens3 -o tun+ -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+
+Направьте трафик VPN-клиента в Интернет с помощью NAT.
+Измените маску IP-адреса в соответствии с полученной вами информацией из результата tun0
+ри выполнении команды «ifconfig».
+
+iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o ens3 -j MASQUERADE
+
+
+Если значение OUTPUT iptables по умолчанию не равно ACCEPT, вам также понадобится строка следующего вида:
+
+iptables -A OUTPUT -o tun+ -j ACCEPT
+
+
+Вот и все, теперь перезапустите службу iptables, и все готово.
