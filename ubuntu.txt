@@ -44,14 +44,14 @@ iperf3 -s
 iperf3 -c <ip-server> -t 10000
 scp /home/sergiy/file root@losst.pro:/root/ - файл на удалённый
 
-scp D:/bdbot.jar gnn@45.9.75.98:/home/gnn/ - файл на удалённый
-scp D:/308464656.json gnn@45.9.75.98:/home/gnn/ - файл на удалённый
+scp bdbot.jar gnn@176.114.77.118:/home/gnn/ - файл на удалённый
+scp 308464656.json gnn@176.114.77.118:/home/gnn/ - файл на удалённый
 
 scp dmdev-12_Bash.zip gnn@192.168.1.100:/home/gnn/
 scp openvpn-install.sh gnn@185.189.12.42:/home/gnn/ - файл на удалённый
 scp -r /home/sergiy/photos root@losst.pro:/root/ - каталог на удалённый
 scp root@losst.pro:/root/file /home/sergiy/ - файл себе с удалённого
-scp ssh gnn@45.95.203.214:/home/gnn/asus_msk.ovpn D:/ - файл себе с удалённого
+scp ssh gnn@176.114.77.118:/home/gnn/autumn.ovpn D:/ - файл себе с удалённого
 scp ssh gnn@185.104.251.212:/home/gnn/msk.ovpn D:/ - файл себе с удалённого
 scp ssh gnn@gnn.work.gd:/home/gnn/ocserv_1.3.0-1_amd64.deb D:/ - файл себе с удалённого
 scp -r root@losst.pro:/root/photos /home/sergiy/ - каталог себе с удалённого
@@ -104,8 +104,8 @@ UDP
 Current System resolvers
 <username>
 
-sudo mv /root/asus_msk.ovpn . 
-sudo chown gnn asus_msk.ovpn
+sudo mv /root/autumn.ovpn .
+sudo chown gnn autumn.ovpn
 
 ===========================
 tmux new-session -s session1
@@ -118,6 +118,13 @@ tmux attach -t session1
 tmux - set -g mouse on
 
 tmux attach -t session1
+
+bwm-ng -t 200 -u bytes
+vnstat
+nload -t 200 -u K
+htop -d 5
+sudo iftop
+
 
 https://losst.pro/monitoring-seti-linux
 ===========================
@@ -326,3 +333,11 @@ iptables -A OUTPUT -o tun+ -j ACCEPT
 
 
 Вот и все, теперь перезапустите службу iptables, и все готово.
+
+===========
+
+Ключи
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDn5Ur5uvyYracySZa4eYPmbnF/PUx6gt5HBYXKKye5K0VBJri/JL8NwjYVD7i+ezS5ySiQ/CJQ/Qk0O8hsMllryAy+N4QZ2yv3eTTzblGGFrJmWPs7zwImiHAhb/CagsLS7Gw4+lg3w3C0H8iRJSW1ZKKCfmmxIWO/7d6s7ZRqe5FQ1mZcMhisTmbOGDDOXakAMwOpPx84X3/9jT7Yh0nbw4pCImjLGLtqtswsPVVoV69Cw2PmKObE7RbKc1lTp4ZIhmFnvMokBA96p6YsF8uuS02xWD/kEDZaL8z2s8Uu7zswdOFSDg5EVgjgswL3ijJ4UGVo/kvlThJq1V9Qu0fiaE7IkTrDpj3ZOvbtI38AdhxU7q30YMyXRvTDnACZAUx9XOF4JSngnnKVeVqxpR3V+fS84MfWa8UHbxA6cDcsikTIB3FdJ5/VKlDNP2p0I+GYJKVTQlSFP8Iy1aPVezRPfyZws9yX6l1NtztvmjumGZZLGdhSlxhT7U7QO9ka9LU= pispo@15s-eq2094ur
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCre1PgEP1K96gSDr7/UHjuu02e4t4avf/5fNd7+qmHd65gaINH9N643OGmpf8/WlF8o0WDQdIB0re+tb0E+r0JxSdWKFPYTBRLc72eWEkG/zWE8lXCiwi3UCCFbowKhpRfgbNb4wcDAD7172ZURZWunnKuyfDZRKECQSo0qvIEoWPG7HGyT+Vs7+Lj8BXAvOyVwvibGEBSUYQpSAch6J6KkEgjw0NDfHDtSL6Ah3mmxDB5K6v0SwviwutbaoN48B7qnq7dAceJl1mTu6SFjJ7TpZoksGFGLFFZyjmwEpOCEwhkdt0Syyv21Cg51pjYgbpZfQKYcDYsKT6HW+aKrOxPXKrZZg9wnzKyNEgBTzCHwaFibG7ggM9Ql6UJ0gIjB8msORoBjQCEs6RW09UFGv7uZ0e9s8zZIAGJ9pkOd2lhJtgIolLAYZlEPWO2bblndpmf4k8ixiwE1DdVPjQxAE5s2bptovNhYsw5qQRn/9SIQtNyZH6k98RxWkxoENFDAss= gnn@FORMULA-mint
