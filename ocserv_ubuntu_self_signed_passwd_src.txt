@@ -281,3 +281,7 @@ https://www.howtoforge.com/how-to-install-openconnect-vpn-server-on-ubuntu-22-04
 
 показать подключеных пользаков
 occtl show users
+
+клиент gui для mint
+apt update && sudo apt install network-manager-openconnect-gnome -y
+apt install openconnect network-manager-openconnect network-manager-openconnect-gnome -y
