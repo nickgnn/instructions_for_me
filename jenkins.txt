@@ -1,0 +1,48 @@
+sudo apt update -y && apt upgrade -y
+sudo apt-get update && apt dist-upgrade -y
+
+
+
+sudo apt install openjdk-21-jre -y
+
+
+
+
+wget -O /etc/apt/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+
+echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+apt-get update
+
+sudo apt-cache madison jenkins - find the possible jenkins versions available
+sudo apt-get install jenkins=2.492.3 -y
+apt-get install jenkins -y
+
+
+
+useradd -d /var/lib/jenkins -m -s /bin/bash jenkins
+ls -l /home
+
+passwd jenkins
+9Z72Zj88
+
+usermod -G sudo -a jenkins
+
+su - jenkins
+
+sudo service sshd restart
+
+
+Обновление плагина SSH Build Agents
+Для версии плагина 2.854.v7fd446b_337c9 требуется формат PEM
+
+Генерация ключей на jenkins
+
+ssh-keygen -t rsa -m PEM
+
+Скопируйте ПУБЛИЧНЫЙ ключ в Authorized_keys агента (~/.ssh/authorized_keys)
+
+Скопируйте ПУБЛИЧНЫЙ ключ в учетные данные Jenkins
