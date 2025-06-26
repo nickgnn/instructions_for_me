@@ -75,6 +75,8 @@ sudo -s
 ssh-keygen
 ssh-copy-id -i id_rsa.pub <ip>
 
+vi /etc/ssh/sshd_config
+vi /etc/ssh/sshd_config.d/50-cloud-init.conf
 
 /etc/ssh/sshd_config
 PermitRootLogin = no
