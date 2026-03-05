@@ -25,6 +25,7 @@ sestatus
 
 sudo apt install vim htop tree mc tmux policycoreutils iperf3 net-tools vnstat bwm-ng iftop nload wget cron -y
 
+tail -f /var/log/auth.log
 
 java -version
 
