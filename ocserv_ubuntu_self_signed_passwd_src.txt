@@ -10,6 +10,7 @@ cd ~ && git clone -b 1.2.4 https://gitlab.com/openconnect/ocserv
 
 cd ~ && git clone -b 1.3.0 https://gitlab.com/openconnect/ocserv
 
+cd ~ && git clone -b 1.4.1 https://gitlab.com/openconnect/ocserv
 
 3. Собираем
 
@@ -42,7 +43,7 @@ cn = "Example CA"
 serial = 001
 
 # In how many days, counting from today, this certificate will expire. Use -1 if there is no expiration date.
-expiration_days = 10
+expiration_days = -1
 
 # Whether this is a CA certificate or not
 ca
@@ -146,6 +147,10 @@ tunnel-all-dns = true
 dns = 77.88.8.7
 dns = 77.88.8.3
 
+#DNS Google
+dns = 8.8.8.8
+dns = 8.8.4.4
+
 # РОУТЫ МОЖЕМ ЗАКОММЕНТИРОВАТЬ ВСЕ, ЕСЛИ ОНИ НАМ НЕ НУЖНЫ, ЕСЛИ НУЖНЫ - СОЗДАЙТЕ СВОЙ ДЛЯ НУЖНОЙ ПОДСЕТИ
 #route = 10.10.10.0/255.255.255.0
 #route = 192.168.0.0/255.255.0.0
@@ -159,7 +164,7 @@ dns = 77.88.8.3
 camouflage = true
 camouflage_secret = "sberkey"
 
-#URL СЕРВЕРА В КЛИЕНТЕ, И ПОМЕНЯЙТЕ КЛЮЧ !!! https://142.54.160.100:28855/?mysecretkluch
+#URL СЕРВЕРА В КЛИЕНТЕ, И ПОМЕНЯЙТЕ КЛЮЧ !!! https://35.247.84.203:443/?sber_vpn
 
 
 8. Создаем директорию clients/configs где будем хранить клиентские конфиги с нужными IP и маршрутами
@@ -167,7 +172,7 @@ camouflage_secret = "sberkey"
 mkdir ./clients/configs
 vi ./clients/configs/gnn
 
-explicit-ipv4 = 10.10.16.12
+explicit-ipv4 = 10.10.16.16
 #route = 10.17.17.0/24 (к примеру маршрут в соседнюю подсеть wireguard)
 
 Имя конфигов должны совпадать с именами пользователей, то есть для dmitry будет также имя ./clients/configs/dmitry
@@ -222,6 +227,7 @@ WantedBy=multi-user.target
 sudo systemctl daemon-reload
 sudo systemctl enable ocserv-iptables.service
 sudo systemctl start ocserv-iptables.service
+sudo systemctl stop ocserv-iptables.service
 sudo systemctl status ocserv-iptables.service
 
 
