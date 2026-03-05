@@ -24,6 +24,7 @@ sudo apt-get update && apt dist-upgrade -y
 sestatus
 
 sudo apt install vim htop tree mc tmux policycoreutils iperf3 net-tools vnstat bwm-ng iftop nload wget cron -y
+sudo apt install vim htop tree mc tmux policycoreutils iperf3 net-tools bwm-ng iftop nload wget cron -y
 
 tail -f /var/log/auth.log
 
